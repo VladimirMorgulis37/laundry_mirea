@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Main Page</title>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+</head>
+<style>
+body{
+  background-color:#b3b3ff;
+  margin: 0 auto;
+  text-align: center;
+  background-color: #b3b3ff;
+  margin: 0;
+  padding: 0;
+  font-family: 'Open Sans', sans-serif;
+}
+
+h1 {
+  margin-top: 40px;
+  margin-bottom: 20px;
+  font-size: 36px;
+  font-weight: bold;
+}
+
+form {
+  margin: 40px auto;
+  max-width: 500px;
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+input[type="text"],
+textarea {
+  display: block;
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+input[type="checkbox"] {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+input[type="submit"],
+input[type="reset"] {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin: 8px;
+  border-radius: 5px;
+  border: none;
+  background-color: #4CAF50;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover,
+input[type="reset"]:hover {
+  background-color: #3e8e41;
+}
+
+button {
+  display: block;
+  margin: 30px auto;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #ccc;
+  color: #000;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #ddd;
+}
+</style>
+
+<body>
+<h1>Прачечная</h1>
+<form name="test" method="post" action="/orders">
+  <p><b>Ваш номер телефона:</b><br>
+    <input type="text" name="telephone_number" size="40">
+  </p>
+  <p><b>Количество белья:</b><br>
+    <input type="text" name="clothes" size="40">
+  </p>
+  <p><b>Количество постельного белья:</b><br>
+    <input type="text" name="bedclothes" size="40">
+  </p>
+  <p><b>Количество занавесок:</b><br>
+    <input type="text" name="curtains" size="40">
+  </p>
+  <p><b>Пожалуйста выберите нужные опции:</b><Br>
+    <input type="checkbox" name="washing"> Мытьё<Br>
+    <input type="checkbox" name="ironing"> Глажка<Br>
+  </p>
+  <p>Комментарий<Br>
+    <textarea name="comment" cols="40" rows="3"></textarea></p>
+  <p><input type="submit" value="Отправить">
+    <input type="reset" value="Очистить"></p>
+</form>
+
+
+<button onclick="location.href='/orders'">Перейти к списку заказов</button>
+</body>
+</html>

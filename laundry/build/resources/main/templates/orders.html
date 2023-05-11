@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Orders</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+</head>
+<script>
+  function cancelOrder() {
+  var orderId = document.getElementById('order-id').value;
+  var url = '/delete/' + orderId;
+  var request = new XMLHttpRequest();
+  request.open('DELETE', url);
+  request.setRequestHeader('Content-Type', 'application/json');
+  request.onload = function() {
+    if (request.status === 200) {
+      alert('Заказ успешно отменен!');
+    } else {
+      alert('При отмене заказа произошла ошибка: ' + request.responseText);
+    }
+  };
+  request.send();
+  return false;
+}
+</script>
+<style>
+  html{
+    margin: 0 auto;
+    text-align: center;
+  }
+table {
+  font-family: 'Open Sans', sans-serif;
+  border-collapse: collapse;
+  margin: 0 auto;
+  text-align: center;
+}
+
+thead {
+  background-color: #b3b3ff;
+}
+
+th,
+td {
+  padding: 10px;
+  border: 1px solid #b3b3ff;
+}
+
+th {
+  font-weight: bold;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+button {
+  background-color: #008CBA;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 20px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+button:hover {
+  background-color: #005f79;
+}
+
+button:active {
+  background-color: #005f79;
+  transform: translateY(2px);
+}
+#cancel-order-form {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Open Sans', sans-serif;
+}
+
+#cancel-order-form label {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+#cancel-order-form input[type=text] {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: none;
+  margin-bottom: 20px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+#cancel-order-form button[type=submit] {
+  background-color: #0066cc;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+#cancel-order-form button[type=submit]:hover {
+  background-color: #004499;
+}
+</style>
+<body>
+  <table>
+    <thead>
+    <tr>
+      <th>Номер заказа</th>
+      <th>Количество одежды</th>
+      <th>Количество белья</th>
+      <th>Количество занавесок</th>
+      <th>Мытьё</th>
+      <th>Глажка</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="Order1 : ${orders}">
+      <td th:text="${Order1.id}"></td>
+      <td th:text="${Order1.clothes}"></td>
+      <td th:text="${Order1.bedclothes}"></td>
+      <td th:text="${Order1.curtains}"></td>
+      <td th:text="${Order1.washing}"></td>
+      <td th:text="${Order1.ironing}"></td>
+<!--      <td><a th:href="@{/delete/{id}(id=${Order1.id})}">Delete</a></td>-->
+    </tr>
+    </tbody>
+  </table>
+  <form id="cancel-order-form" method="post" onsubmit="return cancelOrder()">
+    <label for="order-id">ID заказа:</label>
+    <input type="text" id="order-id" name="id">
+    <br>
+    <label for="order-code">Код заказа:</label>
+    <input type="text" id="order-code" name="code">
+    <br>
+    <button type="submit">Отменить заказ</button>
+  </form>
+  <button onclick="location.href='/index'">Перейти к списку заказов</button>
+</body>
+</html>
